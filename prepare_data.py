@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pnd
 
 # Folder to store all the data
-DATA_FOLDER = Path("/opt/tiger/TorchProtein_3D/data/alphafold")
+DATA_FOLDER = Path("/opt/tiger/data/alphafold")
 make_data.extract_data(DATA_FOLDER, DATA_FOLDER)
 
 uniprot_folder = DATA_FOLDER / "uniprot_files"
@@ -13,7 +13,7 @@ make_data.get_uniprot_info(DATA_FOLDER, uniprot_folder)
 
 avg_scores, lengths_high_confidence, lengths_full = make_data.get_AF_protein_information(DATA_FOLDER)
 
-uniprot_folder = DATA_FOLDER / "uniprot_go"
+# uniprot_folder = DATA_FOLDER / "uniprot_go"
 
 AF_dataframe = pnd.concat([pnd.read_csv(filename, sep="\t") for filename in uniprot_folder.glob("UP*_uniprot.txt")])
 AF_dataframe["Protein family"] = [str(val).split(",")[0] for val in AF_dataframe["Protein families"]] # Superfamily
